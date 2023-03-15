@@ -107,7 +107,7 @@ socket.on("sendmessage",({senderid,receiverid,text})=>{
     // console.log(text)
     const user=getuser(receiverid)
     console.log("the send msg user")
-    console.log(user)
+    // console.log(user)
     // io.to(user.socketid).emit("getmessage",{
         if(user)
 {io.to(user.socketid).emit("getmessage",         
