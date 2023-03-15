@@ -58,6 +58,7 @@ const io=new Server(httpServer
     ,{
     cors:{
         origin:"https://magnificent-kashata-c33ff9.netlify.app",
+        // origin:"*",
         // origin:"http://localhost:5173",
         allowedHeaders: ["my-custom-header"],
         credentials: true,
@@ -72,7 +73,10 @@ const io=new Server(httpServer
 let users=[]
 console.log(users)
 const adduser=(userid,socketid)=>{
-    !users.some((user)=>user.userid===userid) &&
+    console.log(userid)
+    console.log(socketid)
+    console.log("adduser")
+    users.filter((user)=>user.userid!==userid) && //change
     users.push({userid,socketid})
     console.log(users)
 }
@@ -90,16 +94,21 @@ io.on("connection", (socket) => {
     console.log("socket.id")
     io.emit("welcome","this is the socket server")
     socket.on("adduser",(userid)=>{
-         adduser(userid,socket.id)
-         io.emit("getuser",users)
+        adduser(userid,socket.id)
+        io.emit("getuser",users)
+         console.log("adduser")
+         console.log(adduser)
     })
     // console.log(users)
 //send msg
 socket.on("sendmessage",({senderid,receiverid,text})=>{
     console.log(receiverid)
+    console.log(senderid)
     // console.log(text)
     const user=getuser(receiverid)
-    // console.log(user)
+    console.log("the send msg user")
+    console.log(user)
+    // io.to(user.socketid).emit("getmessage",{
     io.to(user.socketid).emit("getmessage",{
         senderid,text
     })
