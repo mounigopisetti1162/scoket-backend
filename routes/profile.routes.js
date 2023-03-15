@@ -9,10 +9,10 @@ const router=express.Router()
 router.post('/:id',async function (req,res)
 {
     const {id}=req.params
-    console.log(id)
+    // console.log(id)
     const user=await getuserbyid(id)
     // console.log(user)
-    console.log("profile updaingh")
+    // console.log("profile updaingh")
     try {
         
     
@@ -21,14 +21,14 @@ router.post('/:id',async function (req,res)
         if(req.body.password)
         {
             try {
-                console.log("this is the password")
+                // console.log("this is the password")
                 req.body.password=await generatehashedpassword(req.body.password)
             } catch (error) {
                 res.status(500).send(error)
             }
         }
         try{
-            console.log("this is thr updta")
+            // console.log("this is thr updta")
             await update_profile(req);
             // await updating(req);
             res.status(200).send({message:'updated sucessfully'})
@@ -50,11 +50,11 @@ router.post('/:id',async function (req,res)
 router.delete('/:id',async function (req,res)
 {
     const {id}=req.params
-    console.log("deleting id")
-    console.log(id)
+    // console.log("deleting id")
+    // console.log(id)
     const user=await getuserbyid(id)
-    console.log(user)
-    console.log("profile deleting")
+    // console.log(user)
+    // console.log("profile deleting")
     try {
         
     

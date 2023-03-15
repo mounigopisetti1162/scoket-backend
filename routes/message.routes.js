@@ -35,7 +35,7 @@ res.send(err)
 router.get("/convo/:user_id/:another_id",auth,async function(req,res)
 {
     try {
-        console.log('findconversation with 2 ids')
+        // console.log('findconversation with 2 ids')
         // console.log(req.params)
         const conversations=await findconversation(req)
         res.send(conversations)

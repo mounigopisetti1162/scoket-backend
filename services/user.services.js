@@ -16,16 +16,16 @@ export async function getuser1() {
     return await client.db('chatting').collection('user').find({ }).toArray();
 }
 export async function getuserbyid(id) {
-    console.log("user by id")
-    console.log(id);
+    // console.log("user by id")
+    // console.log(id);
     return await client.db('chatting').collection('user').findOne({_id:new ObjectId(id)});
 }
 export async function updatepass(id,newpass) {
-    console.log('password updTE')
+    // console.log('password updTE')
     return client.db('chatting').collection('user').updateOne({_id:new ObjectId(id)},{$set:{password:newpass,verfication:'changed'}});
 }
 export async function update_verification(id) {
-    console.log('verication of otp done')
+    // console.log('verication of otp done')
     return client.db('chatting').collection('user').updateOne({_id:new ObjectId(id)},{$set:{verified:true}});
 
 }

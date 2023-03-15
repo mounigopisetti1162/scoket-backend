@@ -26,19 +26,19 @@ const otpsstore=await otps(hashotp,id,token2)
  }
 router.get('/users',auth,async function(request,responce)
 {
-    console.log('i');
+    // console.log('i');
     const user=await getuser1()
     // console.log(user);
     responce.send(user)
 })
 router.get('/users/:id',async function(request,responce)
 {
-    console.log("first")
+    // console.log("first")
     const {id}=request.params
-    console.log(id)
-console.log("the frdsid")
+    // console.log(id)
+// console.log("the frdsid")
     const user=await getuserbyid(id)
-    console.log("getuser")
+    // console.log("getuser")
     responce.send(user)
 })
 
@@ -49,7 +49,7 @@ router.post('/signup',async function(req,res)
     // console.log(found)
     if(found)
     {
-        console.log("not")
+        // console.log("not")
         res.status(401).send({message:"user alredy exist"})
     }
     else{
@@ -61,7 +61,7 @@ router.post('/signup',async function(req,res)
     
     const id=newuser.insertedId.toString()
    
-    otpverification(id,email)
+    await otpverification(id,email)
 
     const token=jwt.sign({id:id},process.env.SCRETE_TOKEN)
     // console.log(newuser.insertedId.toString())
@@ -160,7 +160,7 @@ router.post('/forgotpass',async function(request,responce)
         responce.send({message:'this user is not found'})
     }
     else{
-        console.log("found")
+        // console.log("found")
         const token=jwt.sign({id:userfound._id},process.env.SCRETE,{expiresIn:'15m'})
         const link=`${process.env.BASE_URL}/user/reset-password/${userfound._id}`
         await mail(userfound.email,'verification mail',link)
@@ -196,7 +196,7 @@ router.post(`/reset-password`,async function(request,responce)
         const newpassword=await updatepass(userfound._id,newpass)
         // console.log(newpass)
         responce.send(newpassword)
-        console.log("newpassword")
+        // console.log("newpassword")
 
 })
 

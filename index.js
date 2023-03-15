@@ -10,7 +10,8 @@ import userRouter from './routes/user.route.js'
 import profileRouter from './routes/profile.routes.js'
 import messageRouter from './routes/message.routes.js'
 import bodyParser from 'body-parser'
-
+import http from 'http'
+// import {socketio} from 'socket.io'
 // import express from "express"
 // const PORT=process.env.PORT||8900;
 import { createServer } from "http";
@@ -53,18 +54,21 @@ app.use('/message',messageRouter)
 //     }
 // }
 
-const io=new Server(httpServer,{
+const io=new Server(httpServer
+    ,{
     cors:{
         origin:"https://magnificent-kashata-c33ff9.netlify.app",
         // origin:"http://localhost:5173",
         allowedHeaders: ["my-custom-header"],
         credentials: true,
+        withCredentials: true,
         allowRequest: (req, callback) => {
             const noOriginHeader = req.headers.origin === undefined;
             callback(null, noOriginHeader); // only allow requests without 'origin' header
           }
     },
-});
+}
+);
 let users=[]
 console.log(users)
 const adduser=(userid,socketid)=>{
@@ -152,5 +156,5 @@ app.get('/',function(request,responce)
 })
 
 
-app.listen(PORT,()=>console.log(`server ${PORT}`))
+httpServer.listen(PORT,()=>console.log(`server ${PORT}`))
 export {client}
