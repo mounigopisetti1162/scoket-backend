@@ -51,7 +51,7 @@ res.send({message:"empty"})
 
 router.post('/convo',async function (req,res)
 {
-    const newMessage=await message(req.body)
+    const newMessage=await message(req)
     res.send(newMessage)
 })
 router.get('/singlemsg/:conversationid',auth,async function (req,res)

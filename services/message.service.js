@@ -16,9 +16,9 @@ export async function findconversation(req)
 {
     return client.db("chatting").collection("conversation").find({members:{$all:[req.params.user_id,req.params.another_id]} }).toArray();
 }
-export async function message(body)
-{
-    return client.db("chatting").collection("message").insertOne(body,{createdAt:Date.now()})
+export async function message(req)
+{console.log(req.body)
+    return client.db("chatting").collection("message").insertOne({sender:req.body.sender,conversation_id:req.body.conversation_id,text:req.body.text,createdAt:Date.now()})
 }
 export async function message_convo(req)
 {
